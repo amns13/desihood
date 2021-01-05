@@ -1,0 +1,11 @@
+__pycache__
+
+venv
+
+my.cnf
+
+.env
+
+.vscode
+
+desihood.code-workspace
