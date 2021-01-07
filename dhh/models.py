@@ -14,7 +14,7 @@ class Artist(models.Model):
     name = models.CharField("artist's stage name", max_length=60, unique=True)  # Artist's stage name, not real name
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
-    date_of_birth = models.DateField(blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
     youtube_url = models.URLField(blank=True)
     spotify_url = models.URLField(blank=True)
     # SET_NULL: set label as null if label is deleted
@@ -28,9 +28,11 @@ class SongArtist(models.Model):
     # Roles of an artist in the song.
     RAPPER = 'RP'
     BEAT_PRODUCER = 'BP'
+    CHORUS_SINGER = 'CS'
     ARTIST_ROLE = [
-        (RAPPER, "Rappeer"),
+        (RAPPER, "Rapper"),
         (BEAT_PRODUCER, "Beat by"),
+        (CHORUS_SINGER, "Chorus by")
     ]
     song = models.ForeignKey("Song", on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
@@ -41,7 +43,7 @@ class SongArtist(models.Model):
 class Song(models.Model):
     title = models.CharField(max_length=255)
     artists = models.ManyToManyField(Artist, through=SongArtist, related_name="songs")
-    released_in = models.DateField(blank=True)
+    released_in = models.DateField(null=True, blank=True)
     youtube_url = models.URLField(blank=True)
     spotify_url = models.URLField(blank=True)
     languages = models.ManyToManyField("Language")
