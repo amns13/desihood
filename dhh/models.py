@@ -7,7 +7,7 @@ class Label(models.Model):
     spotify_url = models.URLField(blank=True)
 
     def __str__(self):
-        return f"{self.name}: {self.youtube_url} ||| {self.spotify_url}"
+        return self.name
 
 
 class Artist(models.Model):
@@ -21,7 +21,7 @@ class Artist(models.Model):
     label = models.ForeignKey(Label, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.name}: {self.youtube_url} ||| {self.spotify_url}"
+        return self.name
 
 
 class SongArtist(models.Model):
