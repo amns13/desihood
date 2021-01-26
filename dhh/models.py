@@ -14,7 +14,7 @@ class Artist(models.Model):
     name = models.CharField("artist's stage name", max_length=60, unique=True)  # Artist's stage name, not real name
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
-    date_of_birth = models.DateField(null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)   # For none-string based fields, we need to set both null and blank to true
     youtube_url = models.URLField(blank=True)
     spotify_url = models.URLField(blank=True)
     # SET_NULL: set label as null if label is deleted
@@ -50,7 +50,8 @@ class Song(models.Model):
     label = models.ForeignKey(Label, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.title} by {self.artists} ({self.languages})"
+        # return f"{self.title} by {self.artists} ({self.languages})"    Commenting as many-to-many values are returned as objects.
+        return self.title
 
 
 class Language(models.Model):
